@@ -216,6 +216,16 @@ export const createFocusableComponent = (WrappedComponent: ReactClass<any>) => {
     constructor(props, context) {
       super(props, context);
 
+      let isFocusedAtConstruction = false;
+
+      if (this.props.route === this.props.navigation.getFocusedRoute()) {
+        isFocusedAtConstruction = true;
+      }
+
+      this.state = {
+        isFocused: isFocusedAtConstruction,
+      };
+
       let _prevNavState = null;
       this._unsubcribeFromStore = this.props.navigation.store.subscribe(() => {
         try {
@@ -257,10 +267,6 @@ export const createFocusableComponent = (WrappedComponent: ReactClass<any>) => {
           throw e;
         }
       });
-
-      this.state = {
-        isFocused: true,
-      };
     }
 
     componentWillUnmount() {
