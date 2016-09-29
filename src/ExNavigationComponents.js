@@ -259,7 +259,7 @@ export const createFocusableComponent = (WrappedComponent: ReactClass<any>) => {
       });
 
       this.state = {
-        isFocused: false,
+        isFocused: true,
       };
     }
 
